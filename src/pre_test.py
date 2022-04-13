@@ -2,10 +2,12 @@ import cv2
 
 def setLabel(img,pts,label):
     (x,y,w,h)=cv2.boundingRect(pts)
-    pt1 = (x,y)
-    pt2=(x+w,y+h)
-    cv2.rectangle(img,pt1,pt2,(0,255,0),2)
-    cv2.putText(img,label,(pt1[0],pt1[1]-3),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255))
+    if w>10 and h>10:
+        pt1 = (x,y)
+        pt2=(x+w,y+h)
+        cv2.rectangle(img,pt1,pt2,(0,255,0),2)
+        cv2.putText(img,label,(pt1[0],pt1[1]-3),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255))
+
 img = cv2.imread("test.jpg") 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 ret, dst = cv2.threshold (gray, 150, 255, cv2.THRESH_BINARY) 
